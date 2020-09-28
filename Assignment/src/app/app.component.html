@@ -1,0 +1,63 @@
+<div class="container">
+  <table class="table" style="border: 2px solid;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">#</th>
+        <th scope="col">Album Id</th>
+        <th scope="col">Thumbnail</th>
+        <th scope="col">Title</th>
+        <th scope="col">URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor= "let d of drawingData | paginate:{itemsPerPage: 5, currentPage:page}">
+        <td>{{d.id}}</td>
+        <th><button type="button" class="btn btn-dark btn-sm" (click)="onDelete(d.id)">Delete</button></th>
+        <td>{{d.albumId}}</td>
+        <td><img [src] = "d.thumbnailUrl"></td>
+        <td>{{d.title}}</td>
+        <td><img [src] = "d.url"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="footer">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+      Add
+    </button>
+      <pagination-controls (pageChange)="page=$event" class="float-right"></pagination-controls>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Album Id</label>
+            <input type="number" class="form-control" name="albumId" [(ngModel)]="albumId">
+            <label for="thumbnail">Thumbnail URL</label>
+            <input type="text" class="form-control" id="thumbnail" name="thumbnail" [(ngModel)]="thumbnail">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
+            <label for="url">Image URL</label>
+            <input type="text" class="form-control" id="url" name="url" [(ngModel)]="url">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSave()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
