@@ -29,4 +29,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## What it has?
 
-It has adata table view with edit, delete and pagination  
+It has a data table view with edit, delete and pagination options.
